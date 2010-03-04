@@ -290,12 +290,12 @@ module Prawn
       yield if block_given?
       add_content "b"
     end
-    
-    private
+
+    # private
 
     def map_to_absolute(*point)
       x,y = point.flatten
-      [@bounding_box.absolute_left + x, @bounding_box.absolute_bottom + y]
+      [state.space.left + x, state.space.bottom + y]
     end
 
     def map_to_absolute!(point)

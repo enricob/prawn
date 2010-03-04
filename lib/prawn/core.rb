@@ -82,4 +82,5 @@ require "prawn/core/byte_string"
 require "prawn/core/name_tree"
 require "prawn/core/annotations"
 require "prawn/core/destinations"
+require "prawn/core/bounded_space"
 

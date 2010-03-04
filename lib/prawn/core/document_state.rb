@@ -17,11 +17,15 @@ module Prawn
         @skip_encoding           = options.fetch(:skip_encoding, false)
         @before_render_callbacks = []
         @on_page_create_callback = nil
+
+        @space                   = Prawn::Core::BoundedSpace.new(
+          :top   => Prawn::Document::PageGeometry::SIZES["LETTER"].last,
+          :right => Prawn::Document::PageGeometry::SIZES["LETTER"].first)
       end
 
       attr_accessor :store, :version, :pages, :page, :trailer, :compress,
         :encrypt, :encryption_key, :optimize_objects, :skip_encoding,
-        :before_render_callbacks, :on_page_create_callback
+        :before_render_callbacks, :on_page_create_callback, :space
 
       def normalize_metadata(options)
         options[:info] ||= {}
