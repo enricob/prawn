@@ -15,7 +15,7 @@ module Prawn
       class Text < Cell
 
         attr_reader :font
-        attr_writer :font_size, :text_color
+        attr_writer :font_size, :text_color, :align
         
         def initialize(pdf, point, options={})
           super
@@ -70,6 +70,9 @@ module Prawn
         #
         def draw_content
           @pdf.save_font do
+            text_opts = {}
+            text_opts[:align] = @align || :left
+
             @pdf.set_font(@font, @font_size)
             # NOTE: line_gap and descender depend on @pdf.font_size.
             # This could be cleaner pending prawn changes 
@@ -77,7 +80,7 @@ module Prawn
             @pdf.move_down((@font.line_gap + @font.descender)/2)
             old_color = @pdf.fill_color || '000000'
             @pdf.fill_color(@text_color) if @text_color
-            @pdf.text(@content)
+            @pdf.text(@content, text_opts)
             @pdf.fill_color(old_color)
           end
         end
